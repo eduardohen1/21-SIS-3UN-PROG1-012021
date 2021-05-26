@@ -39,14 +39,31 @@ public class Fabrica {
       //inserir as informações do carro do jão:
       System.out.print("Cor do carro do Jão: ");
       String cor = input.nextLine();
+      
       System.out.print("Marca do carro do Jão: ");
       String marca = input.nextLine();
       System.out.print("Modelo do carro do Jão: ");
       String modelo = input.nextLine();
+
+      //novos campos: numeroPortas; velocidadeMaxima; nomeProprietario
+      System.out.print("Num. portas do carro do Jão: ");
+      int numeroPortas = Integer.parseInt(input.nextLine()); //convertendo String para Integer
+
+      System.out.print("Velocidade maxima do carro do Jão: ");
+      int velocidadeMaxima = Integer.parseInt(input.nextLine()); //convertendo String para Integer
+
+      System.out.print("Nome do proprietário do carro do Jão: ");
+      String nomeProprietario = input.nextLine();
+
       System.out.println("----------------------------");
       carroDoJao.setCor(cor);
       carroDoJao.setMarca(marca);
       carroDoJao.setModelo(modelo);
+      carroDoJao.setNumeroPortas(numeroPortas);
+      carroDoJao.setVelocidadeMaxima(velocidadeMaxima);
+      carroDoJao.setNomeProprietario(nomeProprietario);
+
+      
       System.out.println(carroDoJao.toString());
       System.out.println("----------------------------");
    }

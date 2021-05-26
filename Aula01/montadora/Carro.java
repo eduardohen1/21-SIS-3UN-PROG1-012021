@@ -5,7 +5,10 @@ public class Carro {
    private String cor;
    private String marca;
    private String modelo;
-   //Métodos:
+   private int numeroPortas;
+   private int velocidadeMaxima;
+   private String nomeProprietario;
+
    protected void andar(){
       ligar();
       System.out.println("Carro andando");
@@ -41,6 +44,31 @@ public class Carro {
       this.modelo = modelo;
    }
 
+   //variáveis do exercício:
+   public int getNumeroPortas(){ 
+      return this.numeroPortas;
+   }
+
+   public void setNumeroPortas(int numeroPortas){
+      this.numeroPortas = numeroPortas;
+   }
+
+   public int getVelocidadeMaxima(){ 
+      return this.velocidadeMaxima;
+   }
+
+   public void setVelocidadeMaxima(int velocidadeMaxima){
+      this.velocidadeMaxima = velocidadeMaxima;
+   }
+
+   public String getNomeProprietario(){
+      return this.nomeProprietario;
+   }
+
+   public void setNomeProprietario(String nomeProprietario){
+      this.nomeProprietario = nomeProprietario;
+   }
+
    //método de retorno dos textos:
    public String toString(){
       /*
@@ -49,9 +77,12 @@ public class Carro {
                         "Modelo: " + modelo;
       return resposta;
       */
-      return "Cor: "    + cor   + "\n" +
-             "Marca: "  + marca + "\n" +
-             "Modelo: " + modelo;
+      return "Cor: "               + cor              + "\n" +
+             "Marca: "             + marca            + "\n" +
+             "Modelo: "            + modelo           + "\n" +
+             "Num. portas: "       + numeroPortas     + "\n" +
+             "Vel. máxima: "       + velocidadeMaxima + "\n" +
+             "Nome proprietário: " + nomeProprietario;
    }
 
 }
