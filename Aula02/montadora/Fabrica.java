@@ -15,7 +15,37 @@ public class Fabrica {
       System.out.println("----------------------------");
       System.out.println(carroDoTiao.toString());
       System.out.println("----------------------------");
+      
       //instanciar o carro do Zé
+      System.out.print("Cor do carro do Zé: ");      
+      String cor = input.nextLine();
+      System.out.print("Marca do carro do Zé: ");      
+      String marca = input.nextLine();
+      System.out.print("Modelo do carro do Zé: ");      
+      String modelo = input.nextLine();
+      
+      int numeroPortas;
+      int velocidadeMaxima;
+      String nome;
+      int litrosCombustivel;
+      int kmRodado;
+
+      System.out.print("Número de portas do carro do Zé: ");
+      numeroPortas = Integer.parseInt(input.nextLine());
+      System.out.print("Velocidade máxima do carro do Zé: ");
+      velocidadeMaxima = Integer.parseInt(input.nextLine());
+      System.out.print("Nome do proprietário do carro do Zé: ");
+      nome = input.nextLine();
+      System.out.print("Qte de Litros de combustível do carro do Zé: ");
+      litrosCombustivel = Integer.parseInt(input.nextLine());
+      System.out.print("Quilometragem rodada do carro do Zé: ");
+      kmRodado = Integer.parseInt(input.nextLine());
+
+      Carro carroDoZe = new Carro(cor, marca, modelo, numeroPortas, velocidadeMaxima, nome, litrosCombustivel, kmRodado);
+      System.out.println("----------------------------");
+      System.out.println(carroDoZe.toString());
+      System.out.println("----------------------------");
+
       /*
       Carro carroDoZe = new Carro();
       System.out.println("CARRO DO ZÉ:");
