@@ -8,7 +8,7 @@ public class Principal {
 		
 		TextFieldFrame textFieldFrame = new TextFieldFrame();
 		textFieldFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		textFieldFrame.setSize(350,120); //largura e altura
+		textFieldFrame.setSize(350,200); //largura e altura
 		textFieldFrame.setVisible(true);
 		
 	}
