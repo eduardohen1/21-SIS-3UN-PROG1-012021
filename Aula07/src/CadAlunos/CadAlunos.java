@@ -1,9 +1,13 @@
 package CadAlunos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -29,6 +33,7 @@ public class CadAlunos extends JInternalFrame {
 	private JButton btnAnterior;
 	
 	Aluno alunos[] = new Aluno[5];
+	int qteAlunos = -1; //controle de inserções.	
 		
 	//Construtor
 	public CadAlunos() {
@@ -154,7 +159,103 @@ public class CadAlunos extends JInternalFrame {
                         .addComponent(btnAnterior))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
+        
+        //ações de botões:
+        btnGravarRegistro.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//validar a tela				
+				if(validarTela() == true) {
+					//verificar posição do vetor
+					if(qteAlunos <= 3) {
+						qteAlunos++; //incrementa em +1						
+						//gravar
+						Aluno aluno = new Aluno(txtNome.getText(), txtEmail.getText(), (Integer)txtIdade.getValue(), txtMatricula.getText());
+						alunos[qteAlunos] = aluno; //BD
+						JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+						//limpar a tela
+						limparTela();
+					}else {
+						JOptionPane.showMessageDialog(null, "Não existe mais espaço para novos alunos!");
+					}
+				}
+				
+			}
+		});
+        
+        btnProximo.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int proximo = 0;
+				//verificar se a qte de alunos é >= 0	
+				if(qteAlunos >= 0) {
+					//limparTela();
+					if(txtCodigo.getText().length() == 0) {
+						txtCodigo.setText("0");
+					}else {
+						proximo = Integer.parseInt(txtCodigo.getText()) + 1;
+						if(proximo <= qteAlunos) {
+							txtCodigo.setText(String.valueOf(proximo));
+						}
+					}
+					//pesquisar no vetor:
+					if(Integer.parseInt(txtCodigo.getText()) <= qteAlunos) {
+						int codigo = Integer.parseInt(txtCodigo.getText());
+						Aluno aluno = alunos[codigo]; //busco do BD
+						txtMatricula.setText(aluno.getMatricula());
+						txtNome.setText(aluno.getNome());
+						txtEmail.setText(aluno.getEmail());
+						txtIdade.setValue(aluno.getIdade());
+					}
+				}
+			}
+		});
+        
+        btnAnterior.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Criar rotina de anterior
+			}
+		});
+        
         pack();
 	}
+	
+	/**
+	 * Esta rotina server para validar se os campos em tela estão preenchidos
+	 * @return True ou False
+	 */
+	private boolean validarTela() {
+		boolean resposta = true;
+		//validar a tela.
+		if(txtMatricula.getText().length() == 0) {
+			JOptionPane.showMessageDialog(null, "Campo matrícula em branco. Verifique!");
+			resposta = false;
+		}		
+		if(txtNome.getText().length() == 0 && resposta == true) {
+			JOptionPane.showMessageDialog(null, "Campo nome em branco. Verifique!");
+			resposta = false;
+		}		
+		if(txtEmail.getText().length() == 0 && resposta == true) {
+			JOptionPane.showMessageDialog(null, "Campo e-mail em branco. Verifique!");
+			resposta = false;
+		}		
+		if((Integer)txtIdade.getValue() <= 0 && resposta == true) {
+			JOptionPane.showMessageDialog(null, "Campo idade inválido. Verifique!");
+			resposta = false;
+		}
+		return resposta;
+	}
+	
+	/**
+	 * Rotina para limpar a tela, zerando os campos digitados
+	 */
+	private void limparTela() {
+		txtMatricula.setText("");
+		txtNome.setText("");
+		txtEmail.setText("");
+		txtIdade.setValue(0);
+		txtMatricula.requestFocus();
+	}
+	
 }
