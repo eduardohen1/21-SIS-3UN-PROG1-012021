@@ -66,7 +66,7 @@ public class CadAlunos extends JInternalFrame {
         lblEmail.setText("E-mail:");
         lblIdade.setText("Idade:");
         
-        btnNovoRegistro.setText("Novo registro");
+        btnNovoRegistro.setText("Adulto?");
         btnGravarRegistro.setText("Gravar registro");
         btnProximo.setText("Próximo");
         btnAnterior.setText("Anterior");
@@ -186,27 +186,34 @@ public class CadAlunos extends JInternalFrame {
         btnProximo.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int proximo = 0;
-				//verificar se a qte de alunos é >= 0	
-				if(qteAlunos >= 0) {
-					//limparTela();
-					if(txtCodigo.getText().length() == 0) {
-						txtCodigo.setText("0");
-					}else {
-						proximo = Integer.parseInt(txtCodigo.getText()) + 1;
-						if(proximo <= qteAlunos) {
-							txtCodigo.setText(String.valueOf(proximo));
+				try {
+					int proximo = 0;
+					//verificar se a qte de alunos é >= 0	
+					if(qteAlunos >= 0) {
+						//limparTela();
+						if(txtCodigo.getText().length() == 0) {
+							txtCodigo.setText("0");
+						}else {
+							proximo = Integer.parseInt(txtCodigo.getText()) + 1;
+							if(proximo <= qteAlunos) {
+								txtCodigo.setText(String.valueOf(proximo));
+							}
+						}
+						//pesquisar no vetor:
+						if(Integer.parseInt(txtCodigo.getText()) <= qteAlunos) {
+							int codigo = Integer.parseInt(txtCodigo.getText());
+							Aluno aluno = alunos[codigo]; //busco do BD
+							txtMatricula.setText(aluno.getMatricula());
+							txtNome.setText(aluno.getNome());
+							txtEmail.setText(aluno.getEmail());
+							txtIdade.setValue(aluno.getIdade());
 						}
 					}
-					//pesquisar no vetor:
-					if(Integer.parseInt(txtCodigo.getText()) <= qteAlunos) {
-						int codigo = Integer.parseInt(txtCodigo.getText());
-						Aluno aluno = alunos[codigo]; //busco do BD
-						txtMatricula.setText(aluno.getMatricula());
-						txtNome.setText(aluno.getNome());
-						txtEmail.setText(aluno.getEmail());
-						txtIdade.setValue(aluno.getIdade());
-					}
+				}catch (Exception ex) {
+					txtCodigo.setText("");
+					limparTela();
+					JOptionPane.showMessageDialog(null, "Atenção!\nOcorreu um erro ao buscar"
+							                      + " dados de alunos(prx): " + ex.getMessage());
 				}
 			}
 		});
@@ -214,7 +221,54 @@ public class CadAlunos extends JInternalFrame {
         btnAnterior.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//Criar rotina de anterior
+				//tratamento de exceção
+				try {
+					//Criar rotina de anterior
+					int anterior = 0;
+					if(qteAlunos >= 0) {
+						if(txtCodigo.getText().length() == 0) {
+							txtCodigo.setText("0");
+						}else {
+							anterior = Integer.parseInt(txtCodigo.getText()) - 1;
+							if(anterior >= 0) {
+								txtCodigo.setText(String.valueOf(anterior));
+							}else {
+								txtCodigo.setText("0");
+							}
+							if(Integer.parseInt(txtCodigo.getText()) <= qteAlunos) {
+								Aluno aluno = alunos[Integer.parseInt(txtCodigo.getText())];
+								txtMatricula.setText(aluno.getMatricula());
+								txtNome.setText(aluno.getNome());
+								txtEmail.setText(aluno.getEmail());
+								txtIdade.setValue(aluno.getIdade());
+							}							
+														
+						}
+					}
+				}catch (Exception ex) {
+					txtCodigo.setText("");
+					limparTela();
+					JOptionPane.showMessageDialog(null, "Atenção!\nOcorreu um erro ao buscar"
+							                      + " dados de alunos(ant): " + ex.getMessage());
+				}
+			}
+		});
+        
+        btnNovoRegistro.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(txtCodigo.getText().length() > 0) {
+						Aluno aluno = alunos[Integer.parseInt(txtCodigo.getText())];
+						if(aluno.alunoDeMaior())
+							JOptionPane.showMessageDialog(null, "O aluno " + aluno.getNome() + " já é adulto!");
+						else
+							JOptionPane.showMessageDialog(null, "O aluno " + aluno.getNome() + " não é adulto!");
+					}
+				}catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Erro ao verificar se "
+							                          + "aluno é de maior: " + ex.getMessage());
+				}				
 			}
 		});
         

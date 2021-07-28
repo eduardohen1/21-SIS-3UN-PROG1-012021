@@ -19,4 +19,16 @@ public class Aluno extends Pessoa {
 		this.matricula = matricula;
 	}
 	
+	/**
+	 * Rotina para verificar se o aluno é de maior com tratamento de exceção throws
+	 * @return Verdadeiro ou Falso
+	 * @throws Exception exceção da nossa aplicação
+	 */
+	public boolean alunoDeMaior() throws Exception {
+		boolean resposta = false;
+		if(super.getIdade() >= 18)
+			resposta = true;
+		return resposta;
+	}
+	
 }
