@@ -15,14 +15,26 @@ namespace CadMedalhas
     public partial class Form1 : Form
     {
         //Atributo
-        DadosConexao dadosConexao = new DadosConexao("localhost",
-                                                     "root",
-                                                     "123456",
-                                                     "cadmedalhas");
+        DadosConexao dadosConexaoMySQL = new DadosConexao("localhost",
+                                                          "root",
+                                                          "123456",
+                                                          "cadmedalhas",
+                                                          3306);
+        DadosConexao dadosConexaoMariaDB = new DadosConexao("192.168.12.107",
+                                                            "root",
+                                                            "123456",
+                                                            "cadmedalhas",
+                                                            3307);
+        /// <summary>
+        /// 0 - MySQL
+        /// 1 - MariaDB
+        /// </summary>
+        int qualBD;
 
         public Form1()
         {
             InitializeComponent();
+            qualBD = 1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,16 +44,35 @@ namespace CadMedalhas
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            txtNome.Text = dadosConexao.ToString();
+            txtNome.Text = dadosConexaoMySQL.ToString();
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            ConexaoBD conexaoBD = new ConexaoBD(dadosConexao);
-            if (conexaoBD.conectar())
-                MessageBox.Show("Conectou no BD!!");
+            bool conectou = false;
+            InterfaceBD conexaoBD;
+            if(qualBD == 0)
+            {
+                //Mysql
+                conexaoBD = new ConexaoBDMySQL();
+                conectou = conexaoBD.conectar(dadosConexaoMySQL);
+            }
             else
-                MessageBox.Show("Não conectou :(");
+            {
+                //MariaDB
+                conexaoBD = new ConexaoBDMariaBD();
+                conectou = conexaoBD.conectar(dadosConexaoMariaDB);
+            }
+            if (conectou)
+            {
+                MessageBox.Show("Conectou!");
+                conexaoBD.desconectar();
+            }
+            else
+            {
+                MessageBox.Show("Não conectou!");
+            }
+
         }
     }
 }
