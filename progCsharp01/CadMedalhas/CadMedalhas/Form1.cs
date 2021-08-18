@@ -15,13 +15,13 @@ namespace CadMedalhas
     public partial class Form1 : Form
     {
         //Atributo
-        DadosConexao dadosConexaoMySQL = new DadosConexao("localhost",
-                                                          "root",
+        DadosConexao dadosConexaoMySQL = new DadosConexao("192.168.12.112",
+                                                          "aula",
                                                           "123456",
                                                           "cadmedalhas",
                                                           3306);
-        DadosConexao dadosConexaoMariaDB = new DadosConexao("192.168.12.107",
-                                                            "root",
+        DadosConexao dadosConexaoMariaDB = new DadosConexao("192.168.12.112",
+                                                            "aula",
                                                             "123456",
                                                             "cadmedalhas",
                                                             3307);
@@ -30,11 +30,16 @@ namespace CadMedalhas
         /// 1 - MariaDB
         /// </summary>
         int qualBD;
+        public InterfaceBD conexaoBD { get; set; }
 
         public Form1()
         {
             InitializeComponent();
-            qualBD = 1;
+            qualBD = 0;
+            if (qualBD == 0)
+                conexaoBD = new ConexaoBDMySQL(dadosConexaoMySQL); //mysql
+            else
+                conexaoBD = new ConexaoBDMariaBD(dadosConexaoMariaDB); //mariadb
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,7 +47,13 @@ namespace CadMedalhas
 
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void novoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(this);
+            form2.Show();
+        }
+
+        /*private void btnOk_Click(object sender, EventArgs e)
         {
             txtNome.Text = dadosConexaoMySQL.ToString();
         }
@@ -74,5 +85,6 @@ namespace CadMedalhas
             }
 
         }
+        */
     }
 }

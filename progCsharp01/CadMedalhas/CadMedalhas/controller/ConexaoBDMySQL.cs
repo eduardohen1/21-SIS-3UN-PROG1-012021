@@ -12,10 +12,15 @@ namespace CadMedalhas.controller
     public class ConexaoBDMySQL : InterfaceBD
     {
         //Atributos:
-        MySqlConnection conexaoMySQL = new MySqlConnection();//objeto conexão (tomada)
+        MySqlConnection conexaoMySQL = new MySqlConnection();//objeto conexão (tomada)        
+        public DadosConexao dadosConexao { get; set; }
 
         //Métodos
-        public bool conectar(DadosConexao dadosConexao)
+        public ConexaoBDMySQL(DadosConexao dadosConexao)
+        {
+            this.dadosConexao = dadosConexao;
+        }
+        public bool conectar()
         {
             //testar se o objeto dadosConexao é diferente de null
             if (dadosConexao != null)

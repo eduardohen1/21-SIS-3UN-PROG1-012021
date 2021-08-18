@@ -11,7 +11,7 @@ namespace CadMedalhas.controller
     public interface InterfaceBD
     {
         public MySqlConnection getConexao();
-        public bool conectar(DadosConexao dadosConexao);
+        public bool conectar();
         public bool desconectar();
     }
 }

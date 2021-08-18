@@ -13,9 +13,14 @@ namespace CadMedalhas.controller
     {
         //Atributos
         MySqlConnection conexaoMariaDB = new MySqlConnection();
+        public DadosConexao dadosConexao { get; set; }
 
         //Métodos:
-        public bool conectar(DadosConexao dadosConexao)
+        public ConexaoBDMariaBD(DadosConexao dadosConexao)
+        {
+            this.dadosConexao = dadosConexao;
+        }
+        public bool conectar()
         {
             if(dadosConexao != null)
             {
