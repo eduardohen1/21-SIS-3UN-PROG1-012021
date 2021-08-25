@@ -31,7 +31,7 @@ namespace CadMedalhas.controller
                                  "Database=" + dadosConexao.dataBase + ";" +
                                  "Uid=" + dadosConexao.usuario + ";" +
                                  "Pwd=" + dadosConexao.senha + ";" +
-                                 "Connection Timeout=900;" +
+                                 "Connection Timeout=900;SSL Mode=Required;" +
                                  "Port=" + dadosConexao.porta.ToString();
                     conexaoMySQL = new MySqlConnection(sql);
                     conexaoMySQL.Open();

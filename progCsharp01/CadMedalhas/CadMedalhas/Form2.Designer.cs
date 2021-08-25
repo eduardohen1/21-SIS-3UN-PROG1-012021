@@ -41,6 +41,7 @@ namespace CadMedalhas
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnProximo = new System.Windows.Forms.Button();
             this.btnAnterior = new System.Windows.Forms.Button();
+            this.btnDeletar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -91,7 +92,7 @@ namespace CadMedalhas
             // 
             this.txtNome.Location = new System.Drawing.Point(122, 58);
             this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(257, 23);
+            this.txtNome.Size = new System.Drawing.Size(289, 23);
             this.txtNome.TabIndex = 5;
             // 
             // txtModalidade
@@ -110,7 +111,7 @@ namespace CadMedalhas
             // 
             // btnGravar
             // 
-            this.btnGravar.Location = new System.Drawing.Point(121, 162);
+            this.btnGravar.Location = new System.Drawing.Point(93, 162);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(75, 29);
             this.btnGravar.TabIndex = 9;
@@ -120,7 +121,7 @@ namespace CadMedalhas
             // 
             // btnNovo
             // 
-            this.btnNovo.Location = new System.Drawing.Point(202, 162);
+            this.btnNovo.Location = new System.Drawing.Point(174, 162);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 29);
             this.btnNovo.TabIndex = 10;
@@ -130,28 +131,41 @@ namespace CadMedalhas
             // 
             // btnProximo
             // 
-            this.btnProximo.Location = new System.Drawing.Point(283, 162);
+            this.btnProximo.Location = new System.Drawing.Point(255, 162);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(75, 29);
             this.btnProximo.TabIndex = 11;
             this.btnProximo.Text = "Próximo";
             this.btnProximo.UseVisualStyleBackColor = true;
+            this.btnProximo.Click += new System.EventHandler(this.btnProximo_Click);
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(40, 162);
+            this.btnAnterior.Location = new System.Drawing.Point(12, 162);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(75, 29);
             this.btnAnterior.TabIndex = 8;
             this.btnAnterior.Text = "Anterior";
             this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
+            // btnDeletar
+            // 
+            this.btnDeletar.Location = new System.Drawing.Point(336, 162);
+            this.btnDeletar.Name = "btnDeletar";
+            this.btnDeletar.Size = new System.Drawing.Size(75, 29);
+            this.btnDeletar.TabIndex = 12;
+            this.btnDeletar.Text = "Excluir";
+            this.btnDeletar.UseVisualStyleBackColor = true;
+            this.btnDeletar.Click += new System.EventHandler(this.btnDeletar_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 203);
+            this.ClientSize = new System.Drawing.Size(425, 203);
             this.Controls.Add(this.btnAnterior);
+            this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.btnProximo);
             this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.btnGravar);
@@ -188,5 +202,6 @@ namespace CadMedalhas
         private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Button btnProximo;
         private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.Button btnDeletar;
     }
 }
